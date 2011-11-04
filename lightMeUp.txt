@@ -1,0 +1,5 @@
+* Ha ferdig laget DateCalculatorSteps
+* Ha ferdig Delegate for DateCalculatorSteps
+* DateCalculatorFeature
+* Metodene for DateCalculator mangler (fyll inn)
+* lag metodene i DateCalculator
