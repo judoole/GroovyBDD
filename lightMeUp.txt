@@ -3,3 +3,4 @@
 * DateCalculatorFeature
 * Metodene for DateCalculator mangler (fyll inn)
 * lag metodene i DateCalculator
+* Address skal ikke ha cascading
