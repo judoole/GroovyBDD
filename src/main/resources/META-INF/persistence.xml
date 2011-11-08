@@ -4,7 +4,7 @@
                 version="1.0">
 
         <persistence-unit name="groovy-bdd" transaction-type="RESOURCE_LOCAL">
-                <class>personally.Person</class>
+                <class>ninja.Ninja</class>
         </persistence-unit>
 
 </persistence>
