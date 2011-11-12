@@ -44,7 +44,9 @@
 
 ---
 .center.middle
-# BDD
+# Behaviour
+# Driven
+# Development
 
 ---
 .center.middle
@@ -62,7 +64,7 @@
 
 ---
 .center.middle
-# Jbehave
+# JBehave
 
 ---
 .center.middle
@@ -112,20 +114,6 @@
 
 ---
 .middle
-## Many small steps
-	.java
-	@Component
-	class GodAndOdinStep {
-	    @Delegate 
-	    DateCalculatorSteps dateCalculatorSteps = new DateCalculatorSteps();
-	    @Autowired @Delegate 
-	    NinjaStep ninjaStep
-	    @Autowired @Delegate 
-	    NinjaHouseStep ninjaHouseStep
-	}
-
----
-.middle
 ## Given, When, Then
 	.java
 	class AbstractGroovyFeature {
@@ -139,15 +127,16 @@
 
 ---
 .middle
-## The DateCalculator Feature
+## Many small steps
 	.java
-	class DateCalculatorFeature extends AbstractGroovyFeature{
-	    @Test
-	    void determine_past_date(){
-	        Given.today_is "2011-11-04"
-	        When.I_ask_if_the_date_is_in_the_past_for "2011-1-1"
-	        Then.the_result_from_the_datecalculator_should_be "yes"
-	    }
+	@Component
+	class GodAndOdinStep {
+	    @Delegate 
+	    DateCalculatorSteps dateCalculatorSteps = new DateCalculatorSteps();
+	    @Autowired @Delegate 
+	    NinjaStep ninjaStep
+	    @Autowired @Delegate 
+	    NinjaHouseStep ninjaHouseStep
 	}
 
 ---
@@ -172,9 +161,22 @@
 	}
 
 ---
+.middle
+## The DateCalculator Feature
+	.java
+	class DateCalculatorFeature extends AbstractGroovyFeature{
+	    @Test
+	    void determine_past_date(){
+	        Given.today_is "2011-11-04"
+	        When.I_ask_if_the_date_is_in_the_past_for "2011-1-1"
+	        Then.the_result_from_the_datecalculator_should_be "yes"
+	    }
+	}
+
+---
 .center.middle
-## Spring
-## Hibernate
+# Spring
+# Hibernate
 
 ---
 .middle
@@ -229,6 +231,23 @@
 	        assertThat(get.ninja(nameOfNinja).isDead(), equalTo(true));
 	    }
 	}
+
+---
+.middle
+## Real life crisis
+	.java
+	@Test
+    public void skal_hente_en_innstilling_naar_det_er_match_for_soknad_og_boligtype() {
+        Gitt.Gitt_at_vi_har_en_fresh_database();
+        Og.at_utleieenheten_eksisterer([enhetId: "BJE", active: true, names: [no: "Bjerke", en: "Bjerke"]]);
+        Og.at_boligtypen_med_kode_og_navn_eksisterer("HM", "HM", "BJE");
+        Og.at_utleieobjekt_med_id_og_status_eksisterer("BJErkis007", "BJE", "HM", klarmeldt());
+        Og.at_sokeren_eksisterer(applicant(preferredContractStartDate: JAN_1, preferredContractEndDate: DES_1))
+        Og.at_soknaden_eksisterer([applicant: applicant(), boligtyper: [HM_BJE], state: STATE_ON_HOLD, internal: true]);
+        Naar.jeg_henter_innstilte_tildelinger_med_filtrering_paa([tildelingsdato: JUN_1])
+        Saa.skal_jeg_faa_en_liste_med_tildelinger_som_har_lengde(1)
+        Og.skal_forste_innstilling_fra_liste_med_tildelinger_ha_onsket_start_og_slutt_dato(JAN_1, DES_1)
+    }
 
 ---
 .center.middle
