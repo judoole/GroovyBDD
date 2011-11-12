@@ -11,14 +11,7 @@ import org.springframework.transaction.annotation.Transactional
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = ["classpath:applicationContext-groovy-bdd.xml"])
-class AbstractSpringGroovyFeature extends AbstractGroovyFeature{
+class AbstractSpringGroovyFeature extends AbstractGroovyFeature {
     @PersistenceContext
-    private EntityManager em;
-
-    @After
-    @Transactional
-    void clean_up_database(){
-        em.createQuery("delete from Ninja").executeUpdate();
-        em.createQuery("delete from NinjaHouse").executeUpdate();
-    }
+    private EntityManager em
 }

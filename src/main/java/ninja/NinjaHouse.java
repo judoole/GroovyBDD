@@ -1,24 +1,24 @@
 package ninja;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
-
-import static ninja.Weapon.BOMB;
 
 @Entity
 public class NinjaHouse {
     @Id
-    private String id;
-    @OneToMany
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<Ninja> ninjas;
     private String name;
     private boolean destroyed;
 
-    public void blowUp(){
+    public NinjaHouse() {
+    }
+
+    public void destroy(Weapon weapon){
         for(Ninja ninja:ninjas){
-            ninja.killBy(BOMB);
+            ninja.killBy(weapon);
         }
         destroyed = true;
     }

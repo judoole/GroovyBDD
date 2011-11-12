@@ -12,8 +12,11 @@ class GodAndOdinStep {
     protected DateCalculatorSteps dateCalculatorSteps = new DateCalculatorSteps();
     @Autowired
     @Delegate
-    NinjaStep personStep;
+    NinjaStep personStep
     @Autowired
     @Delegate
-    NinjaHouseStep ninjaHouseStep;
+    NinjaHouseStep ninjaHouseStep
+    @Autowired
+    @Delegate
+    DatabaseStep databaseStep
 }

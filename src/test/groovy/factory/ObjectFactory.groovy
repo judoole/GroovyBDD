@@ -4,6 +4,7 @@ import ninja.Ninja
 import ninja.NinjaHouse
 
 abstract class ObjectFactory {
+    public static final Object NOTHING = new Object();
     static Ninja ninja(Map params = [:]){
         return new Ninja([name:"Splinter"]+params)
     }

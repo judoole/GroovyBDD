@@ -1,10 +1,10 @@
 package features.ninja
 
-import steps.background.AbstractSpringGroovyFeature
-import static ninja.Weapon.SHURIKIEN
+import org.junit.After
 import org.junit.Test
-import static factory.ObjectFactory.ninjaHouse
-import static factory.ObjectFactory.ninja
+import steps.background.AbstractSpringGroovyFeature
+import static ninja.Weapon.BOMB
+import static ninja.Weapon.SHURIKIEN
 
 class NinjaFeatures extends AbstractSpringGroovyFeature{
 
@@ -16,10 +16,14 @@ class NinjaFeatures extends AbstractSpringGroovyFeature{
     }
 
     @Test
-    void a_ninja_house_is_destroy_all_ninjas_in_it_is_killed(){
-        Given.ninja_exists(ninja())
-        And.ninja_house_exists(ninjaHouse(ninjas: [ninja()]))
+    void skal_kverke_alle_ninjas_i_huset_naar_huset_blir_sprengt(){
+        Gitt.et_ninjahus_eksisterer()
+        Når.ninja_huset_blir_odelagt_med BOMB
+        Så.skal_ninjahuset_være_ødelagt()
+    }
 
-
+    @After
+    void rydd_i_databasen() {
+        Gitt.clean_up_database();
     }
 }
