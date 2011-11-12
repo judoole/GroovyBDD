@@ -3,3 +3,5 @@ target/
 *.iws
 .idea/
 *.ipr
+.DS_Store
+images
