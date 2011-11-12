@@ -13,7 +13,6 @@
     </properties>
     <dependencies>
         <dependency>
-            <!-- Used by Hibernate for connections (at least HSQLDB) -->
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
             <version>1.2.2</version>
@@ -30,12 +29,6 @@
             <version>1.6.9</version>
             <scope>compile</scope>
         </dependency>
-        <!-- Spring framework. Core dependencies included by Spring LDAP. -->
-        <!-- <dependency>
-              <groupId>org.springframework</groupId>
-              <artifactId>spring-aop</artifactId>
-              <version>${spring.version}</version>
-          </dependency> -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
@@ -61,16 +54,6 @@
             <artifactId>spring-context-support</artifactId>
             <version>${spring.version}</version>
         </dependency>
-        <!-- <dependency>
-              <groupId>org.springframework</groupId>
-              <artifactId>spring-core</artifactId>
-              <version>${spring.version}</version>
-          </dependency> -->
-        <!-- <dependency>
-              <groupId>org.springframework</groupId>
-              <artifactId>spring-jdbc</artifactId>
-              <version>${spring.version}</version>
-          </dependency> -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -99,12 +82,6 @@
             <scope>test</scope>
             <version>4.9</version>
         </dependency>
-        <!-- <dependency>
-              <groupId>org.mockito</groupId>
-              <artifactId>mockito-all</artifactId>
-              <version>1.8.5</version>
-              <scope>test</scope>
-          </dependency> -->
     </dependencies>
     <build>
         <plugins>
@@ -129,22 +106,7 @@
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <sourceEncoding>ISO-8859-1</sourceEncoding>
-                </configuration>
             </plugin>
-            <!--<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <includes>
-                        <include>**/*Feature*.*</include>
-                        <include>**/Test*.java</include>
-                        <include>**/*Test*.java</include>
-                        <include>**/*TestCase.java</include>
-                    </includes>
-                </configuration>
-            </plugin>-->
         </plugins>
     </build>
 </project>

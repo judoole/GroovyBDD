@@ -17,6 +17,5 @@ class GodAndOdinStep {
     @Delegate
     NinjaHouseStep ninjaHouseStep
     @Autowired
-    @Delegate
-    DatabaseStep databaseStep
+    GetEntity get;
 }

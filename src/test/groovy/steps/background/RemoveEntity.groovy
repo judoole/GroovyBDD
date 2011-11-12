@@ -6,11 +6,11 @@ import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 
 @Component
-class DatabaseStep {
+class RemoveEntity {
     @Autowired JdbcTemplate jdbcTemplate
 
     @Transactional
-    void clean_up_database() {
+    void allEntities() {
         jdbcTemplate.execute("update Ninja set ninjaHouse_id=null")
         jdbcTemplate.execute("delete from NinjaHouse_ninja")
         jdbcTemplate.execute("delete from NinjaHouse")
