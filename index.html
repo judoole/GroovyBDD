@@ -71,6 +71,23 @@
 # Cucumber
 
 ---
+.middle
+For eksempel
+
+	Feature: Division
+	
+	In order to avoid silly mistakes
+	Cashiers must be able to calculate a fraction
+
+	Scenario: Regular numbers
+	
+		I have entered 3 into the calculator
+		I press divide
+		I have entered 2 into the calculator
+
+  1.5 on screen
+
+---
 .center.middle
 ![Cucumber](images/cucumber.jpg)
 
@@ -237,17 +254,22 @@
 ## Real life crisis
 	.java
 	@Test
-    public void skal_hente_en_innstilling_naar_det_er_match_for_soknad_og_boligtype() {
+    void skal_hente_en_ledig_boligperiode_naar_det_finnes_boliger() {
         Gitt.Gitt_at_vi_har_en_fresh_database();
         Og.at_utleieenheten_eksisterer([enhetId: "BJE", active: true, names: [no: "Bjerke", en: "Bjerke"]]);
         Og.at_boligtypen_med_kode_og_navn_eksisterer("HM", "HM", "BJE");
         Og.at_utleieobjekt_med_id_og_status_eksisterer("BJErkis007", "BJE", "HM", klarmeldt());
-        Og.at_sokeren_eksisterer(applicant(preferredContractStartDate: JAN_1, preferredContractEndDate: DES_1))
-        Og.at_soknaden_eksisterer([applicant: applicant(), boligtyper: [HM_BJE], state: STATE_ON_HOLD, internal: true]);
-        Naar.jeg_henter_innstilte_tildelinger_med_filtrering_paa([tildelingsdato: JUN_1])
-        Saa.skal_jeg_faa_en_liste_med_tildelinger_som_har_lengde(1)
-        Og.skal_forste_innstilling_fra_liste_med_tildelinger_ha_onsket_start_og_slutt_dato(JAN_1, DES_1)
+        Naar.jeg_henter_boligperioder_tildelinger_med_filtrering_paa([tildelingsdato: JUN_1])
+        Saa.skal_jeg_faa_en_liste_med_ledige_boligperioder_som_har_lengde(1)
+        Og.forste_ledige_boligperiode_ha_antall_ledige(1)
     }
+
+---
+.center.middle
+
+# ?
+## [bit.ly/GroovyBDD](http://bit.ly/GroovyBDD)
+.footnote[Laget med [github.com/gnab/remark](http://github.com/gnab/remark)]
 
 ---
 .center.middle
@@ -264,10 +286,7 @@
 
 ---
 .center.middle
-
-# ?
-## [bit.ly/GroovyBDD](http://bit.ly/GroovyBDD)
-.footnote[Laget med [github.com/gnab/remark](http://github.com/gnab/remark)]
+![JUnit Cucumber](images/junit_cucumber.png)
     </textarea>
     <div id="slideshow"></div>
   </body>
