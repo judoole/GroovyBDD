@@ -9,11 +9,9 @@ import steps.ninja.NinjaHouseStep
 @Component
 class GodAndOdinStep {
     @Delegate
-    protected DateCalculatorSteps dateCalculatorSteps = new DateCalculatorSteps();
-    @Autowired
-    @Delegate
-    NinjaStep personStep
-    @Autowired
-    @Delegate
+	DateCalculatorSteps dateCalculatorSteps = new DateCalculatorSteps();
+    @Autowired @Delegate
+    NinjaStep ninjaStep
+    @Autowired @Delegate
     NinjaHouseStep ninjaHouseStep
 }

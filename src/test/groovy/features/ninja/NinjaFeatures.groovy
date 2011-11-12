@@ -16,14 +16,15 @@ class NinjaFeatures extends AbstractSpringGroovyFeature{
     }
 
     @Test
-    void skal_kverke_alle_ninjas_i_huset_naar_huset_blir_sprengt(){
+    void kill_all_the_ninjas_in_the_house(){
         Given.ninja_house_exists()
         When.the_ninjahouse_gets_destroyed_by BOMB
         Then.the_ninjahouse_should_be_destroyed()
+		And.the_ninja_should_be_dead ninja().name
     }
 
     @After
-    void rydd_i_databasen() {
+    void clean_up_repo() {
         remove.allEntities();
     }
 }
