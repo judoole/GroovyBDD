@@ -69,7 +69,9 @@
 # Cucumber
 
 ---
+# Maven
 
+---
 .center.middle
 # Groovy
 
@@ -79,8 +81,117 @@
 	.java
 	class ObjectFactory {       
 	   	static Ninja ninja(Map params = [:]){
-	       	return new Ninja([name:"Splinter"]+params)
+	       	return new Ninja([name:"Splinter", weapon:"Katana"]+params)
 	   	}
+	...
+	Ninja n = ninja(name:"Shredder");
+
+---
+.middle
+## @Delegate
+	.java
+	class MyeBruktKode{
+		String someNumber() {
+			return "42"
+		}
+	}
+
+
+	class MinService{
+		@Delegate MyeBruktKode mye = new MyeBruktKode()
+		
+		String whatsTheMeaningOfLife() {
+			return someNumber()
+		}
+	}
+
+---
+.middle
+## Many small steps
+	.java
+	@Component
+	class GodAndOdinStep {
+	    @Delegate 
+	    DateCalculatorSteps dateCalculatorSteps = new DateCalculatorSteps();
+	    @Autowired @Delegate 
+	    NinjaStep ninjaStep
+	    @Autowired @Delegate 
+	    NinjaHouseStep ninjaHouseStep
+	}
+
+---
+.middle
+## Given, When, Then
+	.java
+	class AbstractGroovyFeature {
+	    @Autowired protected GodAndOdinStep Given = new GodAndOdinStep();
+	    @Autowired protected GodAndOdinStep When = Given;
+	    @Autowired protected GodAndOdinStep Then = Given;
+	    @Autowired protected GodAndOdinStep And = Given;
+	
+		@Autowired protected RemoveEntity remove
+	}
+
+---
+.middle
+## The DateCalculator Feature
+	.java
+	class DateCalculatorFeature extends AbstractGroovyFeature{
+	    @Test
+	    void determine_past_date(){
+	        Given.today_is "2011-11-04"
+	        When.I_ask_if_the_date_is_in_the_past_for "2011-1-1"
+	        Then.the_result_from_the_datecalculator_should_be "yes"
+	    }
+	}
+
+---
+.middle
+## The Step
+	.java
+	class DateCalculatorSteps {
+	    DateCalculator calculator;
+	    String result
+
+	    void today_is(String date){
+	        calculator = new DateCalculator(Date.parse("yyyy-MM-dd", date))
+	    }
+
+	    void I_ask_if_the_date_is_in_the_past_for(String date){
+	        return calculator.isDateInThePast(Date.parse("yyyy-MM-dd", date))
+	    }
+
+	    void the_result_from_the_datecalculator_should_be(String answer){
+	        assertThat(result, equalTo(answer))
+	    }
+	}
+
+---
+.center.middle
+## Spring
+## Hibernate
+
+---
+.middle
+## RunWith Spring like the wind
+	.java
+	@RunWith(SpringJUnit4ClassRunner.class)
+	@ContextConfiguration(locations=["classpath:applicationContext-groovy-bdd.xml"])
+	class AbstractSpringGroovyFeature extends AbstractGroovyFeature {
+	}
+
+---
+.middle
+## Groovy NinjaFeatures sprinkled with Spring
+	.java
+	class NinjaFeatures extends AbstractSpringGroovyFeature{
+
+	    @Test
+	    void should_be_able_to_kill_a_ninja(){
+	        Given.ninja_exists([name:"Shredder"])
+	        When.the_ninja_gets_killed_by SHURIKIEN
+	        Then.the_ninja_should_be_dead "Shredder"
+	    }
 
 ---
 .center.middle
@@ -99,6 +210,7 @@
 .center.middle
 
 # ?
+## [bit.ly/GroovyBDD](http://bit.ly/GroovyBDD)
 .footnote[Laget med [github.com/gnab/remark](http://github.com/gnab/remark)]
     </textarea>
     <div id="slideshow"></div>
