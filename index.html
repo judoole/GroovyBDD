@@ -69,7 +69,8 @@
 # Cucumber
 
 ---
-# Maven
+.center.middle
+![Cucmer](images/cucumber.jpg)
 
 ---
 .center.middle
@@ -158,7 +159,7 @@
 	    }
 
 	    void I_ask_if_the_date_is_in_the_past_for(String date){
-	        return calculator.isDateInThePast(Date.parse("yyyy-MM-dd", date))
+	        result = calculator.isDateInThePast(Date.parse("yyyy-MM-dd", date))
 	    }
 
 	    void the_result_from_the_datecalculator_should_be(String answer){
@@ -192,6 +193,38 @@
 	        When.the_ninja_gets_killed_by SHURIKIEN
 	        Then.the_ninja_should_be_dead "Shredder"
 	    }
+	
+		@After
+		void clean_up_repo() {
+			remove.allEntities();
+		}
+
+---
+.middle
+## Spring up for NinjaStep
+	.java
+	@Component
+	class NinjaStep {
+	    @Autowired GetEntity get
+	    @Autowired PersistEntity persist
+	    private Ninja _ninja
+
+	    @Transactional
+	    void ninja_exists(Object theNinja = null) {
+	        _ninja = theNinja == null ? ninja() : new Ninja(theNinja)
+	        persist.entity(_ninja);
+	    }
+
+	    @Transactional
+	    void the_ninja_gets_killed_by(Weapon weapon) {
+	        get.ninja(_ninja.name).killBy(weapon);
+	    }
+
+	    @Transactional
+	    void the_ninja_should_be_dead(String nameOfNinja) {
+	        assertThat(get.ninja(nameOfNinja).isDead(), equalTo(true));
+	    }
+	}
 
 ---
 .center.middle
