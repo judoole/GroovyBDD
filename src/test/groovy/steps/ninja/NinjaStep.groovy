@@ -9,22 +9,23 @@ import steps.background.GetEntity
 import steps.background.PersistEntity
 import static org.hamcrest.CoreMatchers.equalTo
 import static org.junit.Assert.assertThat
+import static factory.ObjectFactory.ninja
 
 @Component
 class NinjaStep {
     @Autowired GetEntity get
     @Autowired PersistEntity persist
-    private Ninja ninjaOnStep
+    private Ninja _ninja
 
     @Transactional
-    void ninja_exists(Object ninja) {
-        this.ninjaOnStep = new Ninja(ninja)
-        persist.entity(this.ninjaOnStep);
+    void ninja_exists(Object theNinja = null) {
+        _ninja = theNinja == null ? ninja() : new Ninja(theNinja)
+        persist.entity(this._ninja);
     }
 
     @Transactional
     void the_ninja_gets_killed_by(Weapon weapon) {
-        get.ninja(ninjaOnStep.name).killBy(weapon);
+        get.ninja(_ninja.name).killBy(weapon);
     }
 
     @Transactional

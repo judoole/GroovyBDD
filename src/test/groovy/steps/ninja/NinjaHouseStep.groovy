@@ -15,22 +15,22 @@ import static org.junit.Assert.assertThat
 class NinjaHouseStep {
     @Autowired GetEntity get
     @Autowired PersistEntity persist
-    private NinjaHouse ninjaHouseOnStep
+    private NinjaHouse _ninjaHouse
 
     @Transactional
     void ninja_house_exists(Object house = null) {
-        this.ninjaHouseOnStep = house == null ? ninjaHouse() : new NinjaHouse(house)
-        persist.entity(ninjaHouseOnStep);
+        _ninjaHouse = house == null ? ninjaHouse() : new NinjaHouse(house)
+        persist.entity(_ninjaHouse);
     }
 
     @Transactional
     void the_ninjahouse_gets_destroyed_by(Weapon weapon) {
-       get.ninjaHouse(ninjaHouseOnStep.name).destroy(weapon);
+       get.ninjaHouse(_ninjaHouse.name).destroy(weapon);
     }
 
     @Transactional
     void the_ninjahouse_should_be_destroyed(String name = null) {
-        String nameOfHouse = name == null ? ninjaHouseOnStep.name : name;
+        String nameOfHouse = name == null ? _ninjaHouse.name : name;
         NinjaHouse n = get.ninjaHouse(nameOfHouse)
         assertThat(n.destroyed, equalTo(true));
     }
