@@ -13,8 +13,8 @@ import static org.junit.Assert.assertThat
 
 @Component
 class NinjaHouseStep {
-    @Autowired GetEntity get
-    @Autowired PersistEntity persist
+    @Autowired private GetEntity get
+    @Autowired private PersistEntity persist
     private NinjaHouse _ninjaHouse
 
     @Transactional
